@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myStudent">
+    <insert id="insert" parameterType="Student">
+        insert into student (rollNo,name,email)
+        values (#{rollNo},#{name},#{email});
+    </insert>
+    <update id="update" parameterType="Student">
+        update student set name=#{name},
+        rollNo=#{rollNo},email=#{email}
+        where id=#{id};
+    </update>
+    <resultMap id="result" type="Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="rollNo" column="rollNo"/>
+        <result property="email" column="email"/>
+    </resultMap>
+    <select id="getById" parameterType="int" resultMap="result">
+        select * from student where id=#{id};
+    </select>
+    <select id="getAll" resultMap="result">
+        select * from student;
+    </select>
+    <delete id="delete" parameterType="int">
+        delete from student where id=#{id};
+    </delete>
+
+</mapper>
